@@ -32,4 +32,4 @@ File handling in C is a low-level but powerful mechanism that gives programmers 
 
 #OUTPUT
 
-![Image](https://github.com/user-attachments/assets/b94612f5-a45a-4935-9326-3672982f921b)
+![Image](https://github.com/user-attachments/assets/5f2e374c-6365-403d-8677-879c64294e38)
