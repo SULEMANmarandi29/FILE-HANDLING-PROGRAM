@@ -26,5 +26,9 @@ It’s also one of the safest operations, as it minimizes the risk of accidental
 # Closing and Flushing
 Regardless of the operation, closing a file is vital. It frees up system resources and ensures that any buffered output is written out. Failing to close a file can lead to memory leaks or data corruption. In C, closing is done through a standard function, and a well-written program always verifies that the file was successfully closed.
 
+#OUTPUT
+
+![Image](https://github.com/user-attachments/assets/b94612f5-a45a-4935-9326-3672982f921b)
+
 #Final Thoughts
 File handling in C is a low-level but powerful mechanism that gives programmers tight control over data management. With careful design and proper use of file operations—creation, reading, writing, and appending—a program can effectively interact with the outside world and maintain state across executions. It's an essential skill for any systems programmer and forms the foundation for more advanced topics like file compression, memory-mapped files, and database design.
