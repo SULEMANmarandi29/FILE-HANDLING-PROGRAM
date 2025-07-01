@@ -1,5 +1,16 @@
 # FILE-HANDLING-PROGRAM
 
+COMPANY: CODTECH IT SOLUTIONS
+
+NAME: AMAN SULEMAN MARANDI
+
+INTERN ID: CT04DF2337
+
+DOMAIN: C PROGRAMMING
+
+DURATION: 4 WEEKS
+
+MENTOR: NEELA SANTHOSH KUMAR
 
 # Understanding File Handling in C
 File handling is a crucial aspect of the C programming language that enables developers to manage data beyond the lifespan of a program's execution. By using files, data can be stored persistently on disk and accessed later, making it possible to build robust applications such as databases, configuration utilities, and logging systems. C provides a rich set of functions in the standard library (stdio.h) to perform operations like creating, reading, writing, and appending files. Let’s explore these operations in depth—focusing on how they work and why they’re important—without diving into actual code.
