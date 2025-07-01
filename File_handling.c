@@ -1,96 +1,92 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Node structure
-struct Node {
-    int data;
-    struct Node* next;
-};
-
-// Insert at the end
-void insert(struct Node** head_ref, int new_data) {
-    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
-    struct Node* last = *head_ref;
-
-    new_node->data = new_data;
-    new_node->next = NULL;
-
-    if (*head_ref == NULL) {
-        *head_ref = new_node;
+void create_file(const char *filename) {
+    FILE *fptr = fopen(filename, "w");
+    if (fptr == NULL) {
+        printf("Error! Could not create file '%s'\n", filename);
         return;
     }
-
-    while (last->next != NULL)
-        last = last->next;
-
-    last->next = new_node;
+    fclose(fptr);
+    printf("Successfully created file '%s'\n", filename);
 }
 
-// Delete by value
-void deleteNode(struct Node** head_ref, int key) {
-    struct Node *temp = *head_ref, *prev = NULL;
-
-    if (temp != NULL && temp->data == key) {
-        *head_ref = temp->next;
-        free(temp);
+void write_to_file(const char *filename, const char *content) {
+    FILE *fptr = fopen(filename, "w");
+    if (fptr == NULL) {
+        printf("Error! Could not write to file '%s'\n", filename);
         return;
     }
-
-    while (temp != NULL && temp->data != key) {
-        prev = temp;
-        temp = temp->next;
-    }
-
-    if (temp == NULL) {
-        printf("Value %d not found in the list.\n", key);
-        return;
-    }
-
-    prev->next = temp->next;
-    free(temp);
+    fprintf(fptr, "%s", content);
+    fclose(fptr);
+    printf("Successfully written content to file '%s'\n", filename);
 }
 
-// Traverse and display the list
-void traverse(struct Node* node) {
-    while (node != NULL) {
-        printf("%d -> ", node->data);
-        node = node->next;
+void append_to_file(const char *filename, const char *content) {
+    FILE *fptr = fopen(filename, "a");
+    if (fptr == NULL) {
+        printf("Error! Could not append to file '%s'\n", filename);
+        return;
     }
-    printf("NULL\n");
+    fprintf(fptr, "%s", content);
+    fclose(fptr);
+    printf("Successfully appended content to file '%s'\n", filename);
+}
+
+void read_file(const char *filename) {
+    FILE *fptr = fopen(filename, "r");
+    if (fptr == NULL) {
+        printf("Error! Could not read file '%s'\n", filename);
+        return;
+    }
+    printf("\nContents of file '%s':\n", filename);
+    printf("----------------------------------------\n");
+    char ch;
+    while ((ch = fgetc(fptr)) != EOF) {
+        putchar(ch);
+    }
+    printf("\n----------------------------------------\n");
+    fclose(fptr);
 }
 
 int main() {
-    struct Node* head = NULL;
-    int choice, value;
-
-    do {
-        printf("\n--- Menu ---\n");
-        printf("1. Insert\n2. Delete\n3. Display\n4. Exit\n");
+    int choice;
+    char filename[100];
+    char content[1024];
+    while (1) {
+        printf("\nFile Operations Menu:\n");
+        printf("1. Create file\n");
+        printf("2. Write to file\n");
+        printf("3. Append to file\n");
+        printf("4. Read file\n");
+        printf("5. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-
+        getchar(); // consume newline
+        if (choice == 5) break;
+        printf("Enter file name: ");
+        fgets(filename, sizeof(filename), stdin);
+        filename[strcspn(filename, "\n")] = 0;
         switch (choice) {
             case 1:
-                printf("Enter value to insert: ");
-                scanf("%d", &value);
-                insert(&head, value);
+                create_file(filename);
                 break;
             case 2:
-                printf("Enter value to delete: ");
-                scanf("%d", &value);
-                deleteNode(&head, value);
+                printf("Enter content to write: ");
+                fgets(content, sizeof(content), stdin);
+                write_to_file(filename, content);
                 break;
             case 3:
-                printf("Current Linked List: ");
-                traverse(head);
+                printf("Enter content to append: ");
+                fgets(content, sizeof(content), stdin);
+                append_to_file(filename, content);
                 break;
             case 4:
-                printf("Exiting.\n");
+                read_file(filename);
                 break;
             default:
-                printf("Invalid choice.\n");
+                printf("Invalid choice!\n");
         }
-    } while (choice != 4);
-
+    }
     return 0;
 }
